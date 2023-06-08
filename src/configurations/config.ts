@@ -8,6 +8,9 @@ export default class Config {
     public readonly SECRET_KEY_ONE: string;
     public readonly SECRET_KEY_TWO: string;
     public readonly JWT_TOKEN: string;
+    public readonly CLOUD_NAME: string;
+    public readonly CLOUD_API_KEY: string;
+    public readonly CLOUD_API_SECRET: string;
 
     private constructor() {
         this.PORT = Number(process.env.PORT) || 3000;
@@ -18,6 +21,9 @@ export default class Config {
         this.SECRET_KEY_ONE = process.env.SECRET_KEY_ONE || '';
         this.SECRET_KEY_TWO = process.env.SECRET_KEY_TWO || '';
         this.JWT_TOKEN = process.env.JWT_TOKEN || '';
+        this.CLOUD_NAME = process.env.CLOUD_NAME || '';
+        this.CLOUD_API_KEY = process.env.CLOUD_API_KEY || '';
+        this.CLOUD_API_SECRET = process.env.CLOUD_API_SECRET || '';
     }
 
     public static getInstance(): Config {
