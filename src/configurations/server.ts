@@ -11,7 +11,7 @@ import Logger from "@configurations/logger";
 import HTTP_STATUS from "http-status-codes";
 import BullBoard from "@bull/bull.board";
 import MainRouter from "@routes/main.router";
-import IErrorResponse from "@interfaces/error.response.interface";
+import IErrorResponse from "@interfaces/error-response.interface";
 import CustomError from "@shared/errors/custom.error";
 
 export default class Server {
