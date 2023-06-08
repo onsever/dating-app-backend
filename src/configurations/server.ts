@@ -11,6 +11,8 @@ import Logger from "@configurations/logger";
 import HTTP_STATUS from "http-status-codes";
 import BullBoard from "@bull/bull.board";
 import MainRouter from "@routes/main.router";
+import IErrorResponse from "@interfaces/error.response.interface";
+import CustomError from "@shared/errors/custom.error";
 
 export default class Server {
     private readonly app: Application;
@@ -82,12 +84,12 @@ export default class Server {
             });
         });
 
-        app.use((error: Error, _req: Request, res: Response, next: NextFunction) => {
-            this.log.error(`Error: ${error}`);
-            res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({
-                status: HTTP_STATUS.INTERNAL_SERVER_ERROR,
-                message: 'Something went wrong!'
-            });
+        app.use((error: IErrorResponse, _req: Request, res: Response, next: NextFunction) => {
+            this.log.error(`Error: ${error.message}`);
+
+            if (error instanceof CustomError) {
+                return res.status(error.statusCode).json(error.serializeErrors());
+            }
 
             next();
         });
